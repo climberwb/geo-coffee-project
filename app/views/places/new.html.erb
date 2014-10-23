@@ -1,0 +1,15 @@
+<h1>Looking for Coffee?</h1>
+<div class = "col-md-4">
+  <%= form_for @place do |f| %>
+    <div class = "form-group">
+      <%= f.label :city %>:
+      <%= f.text_field :city, placeholder: "Chevy Chase", class: 'form-control' %><br />
+    </div>
+    <div class = "form-group">
+      <%= f.label :state %>:
+      <%= f.text_field :state, placeholder: "Maryland", class: 'form-control' %><br />
+    </div>
+    <%= f.submit "Search Coffee!", class: 'btn btn-success' %>
+  <% end %>
+</div>
+

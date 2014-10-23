@@ -1,0 +1,15 @@
+<h1>Show Search Results</h1>
+
+<p id="notice"><%= notice %></p>
+
+<% (0..9).each do |num| %>
+<ul class = 'list-group'>
+  <li style=''>
+ <strong> <%= @caffee_list[num].name.to_s%></strong></br>
+  <%= @caffee_list[num].formatted_address.to_s%>
+  </li>
+</ul>
+<% end %>
+
+<%= link_to 'Back', new_place_path %>
+
