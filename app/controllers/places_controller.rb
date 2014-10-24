@@ -11,11 +11,16 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
-   # @
-   @place = Place.find(params[:id])
-   @client = GooglePlaces::Client.new('AIzaSyC-spk1vTbKfmy1Ak7fdlbzLdShy_7i0O0')
-   @caffee_list = @client.spots_by_query("coffee near #{@place .city} #{@place.state}" )
+    begin
+        @place = Place.find(params[:id])
+        @client = GooglePlaces::Client.new('AIzaSyC-spk1vTbKfmy1Ak7fdlbzLdShy_7i0O0')
 
+        @caffee_list = @client.spots_by_query("coffee near #{@place .city} #{@place.state}" )
+    rescue
+
+        flash[:notice] = "We could not perform a search at this time. Please try again :)"
+        redirect_to new_place_path
+   end
   end
 
   # GET /places/new
@@ -30,28 +35,18 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
-   # @place = Place.new(place_params)
-    #
-      @place = Place.create(
-
+        @place = Place.create(
         :city => params[:place][:city],
         :state  => params[:place][:state]
        )
       @var  = params[:place][:city]
-       # @client = GooglePlaces::Client.new('AIzaSyC-spk1vTbKfmy1Ak7fdlbzLdShy_7i0O0')
-       #  @list = @client.spots_by_query("coffee near #{params[:place][:city]} #{params[:place][:state]}" )
-
-
-   # respond_to do |format|
       if @place.save
          redirect_to @place
-        # format.html { redirect_to @place, notice: "Place was successfully created. #{@list[0].name.to_s} #{@list[0].formatted_address.to_s}"}
-        # format.json { render :show, status: :created, location: @place }
+
       else
         format.html { render :new }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
-    #end
   end
 
   # PATCH/PUT /places/1

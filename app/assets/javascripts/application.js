@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+$(document).ready(function(){
+  $('.btn').click(function (event) {
+      if($('.city-label').val() == ""){
+        event.preventDefault();
+        alert('You must put a city!');
+      }
+    });
+});

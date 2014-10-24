@@ -1,9 +1,13 @@
+<% if flash[:notice] %>
+   <p class="flash-notice alert alert-danger"><%= flash[:notice] %></p>
+ <% end %>
+
 <h1>Looking for Coffee?</h1>
 <div class = "col-md-4">
   <%= form_for @place do |f| %>
     <div class = "form-group">
       <%= f.label :city %>:
-      <%= f.text_field :city, placeholder: "Chevy Chase", class: 'form-control' %><br />
+      <%= f.text_field :city, placeholder: "Chevy Chase", class: 'form-control city-label' %><br />
     </div>
     <div class = "form-group">
       <%= f.label :state %>:
